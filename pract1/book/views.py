@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 
 def hello(request): # ()안의 requset는 request한지 확인하는 역할을 한다.
     data = {
-        "tittle" : "Java",
+        "title" : "Java",
         "author" : "John",
         "publisher" : "제일",
         "price" : 35000
