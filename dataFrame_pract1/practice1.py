@@ -38,7 +38,7 @@ if __name__ == "__main__": # 현재 내가 쓰고 있는 스크립트 이름과 
         {"id": 6, "user_id": 2, "book_id": 1},
         {"id": 7, "user_id": 3, "book_id": 2},
         {"id": 8, "user_id": 4, "book_id": 3},
-        {"id": 9, "user_id": 5, "book_id": 4},
+        {"id": 9, "user_id": 5, "book_id": 5},
         {"id": 10, "user_id": 1, "book_id": 5}
     ]
 
@@ -47,7 +47,26 @@ if __name__ == "__main__": # 현재 내가 쓰고 있는 스크립트 이름과 
     order_df = pd.DataFrame(orders,columns=["id","user_id","book_id"])
 
     group_df = book_df.groupby('author')['price'].mean()
-    print(group_df)
+
+    pivot_df = order_df.pivot_table(index='user_id'
+                                    ,columns='book_id'
+                                    ,values='id'
+                                    ,aggfunc='count'
+                                    ,fill_value=0)
+
+    pivot_price = user_order_book_merge = pd.merge(
+            pd.merge(user_df, order_df, on='user_id', how='inner'),
+            book_df,
+            on = 'book_id',
+            how = 'inner'
+        ).pivot_table(index="user_id",columns='book_id',values='price',aggfunc='sum',fill_value=0)
+
+    print(pivot_price)
+
+    # print(pivot_df)
+
+    # print(pivot_df)
+    # print(group_df)
 
     # for key,value in group_df:
     #     print("key" , key)
