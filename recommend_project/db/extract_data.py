@@ -21,6 +21,7 @@ if __name__ == "__main__":
     #                         sep="::",
     #                         engine='python'
     #                         )
+    # ratings_df.to_pickle("../data/ratings.pkl")
     ratings_df = pd.read_pickle("../data/ratings.pkl")
     # print(ratings_df['user_id'].nunique())
     # print(ratings_df['movie_id'].value_counts()) # value_counts는 값을 movie_id의 유니크한 값을 카운트 하는데 많은 순서대로!
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     movie_id_to_title = dict(zip(movies_df['movie_id'], movies_df['title']))
     new_df.columns = new_df.columns.map(movie_id_to_title)
     print(origin_matrix)
-
+    exit()
     # user1이 안본것중에서 4.5이상인 영화의 장르와 user1이 본 영화의 장르가 비슷하다! 비슷한지 보자
 
     user_id = 4
@@ -87,8 +88,8 @@ if __name__ == "__main__":
 
     print(f"User {user_id}에게 추천된 상위 {top_n}개 영화의 장르:\n{recommended_movie_genres}")
 
-    exit()
-    # ratings_df.to_pickle("../data/ratings.pkl")
+    #exit()
+    ratings_df.to_pickle("../data/ratings.pkl")
     # ratings_df.iloc[:1000,:].to_csv("../data/ratings.csv")
     # exit()   # > > csv에 데이터 1000개만 잘라서 save
     # ratings_df.drop("Unnamed: 0", inplace=True, axis=1)
